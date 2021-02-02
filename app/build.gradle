@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion rootProject.ext.compile_sdk_version
+    buildToolsVersion rootProject.ext.build_tools_version
 
     defaultConfig {
         applicationId "com.ibk.appbackend"
-        minSdkVersion 16
-        targetSdkVersion 30
+        minSdkVersion rootProject.ext.min_sdk_version
+        targetSdkVersion rootProject.ext.target_sdk_version
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -19,6 +19,7 @@ android {
         // so, this way we can find BASE_URL & APP_ID in BuildConfig.APP_ID or BuildConfig.BASE_URL
         buildConfigField "String", "BASE_URL", "\"" + getBaseUrl() + "\""
         buildConfigField "String", "APP_ID", "\"" + getAppId() + "\""
+
     }
 
     buildTypes {
@@ -45,7 +46,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -54,15 +55,20 @@ dependencies {
     implementation rootProject.ext.retrofitDependencies.retrofit2 // REST API calling library
     implementation rootProject.ext.retrofitDependencies.converterGson // JSON parsing library
 
-    // ihsanbal - Interceptor for OkHttp3 with pretty logger
+    // ihsanbal - Interceptor for OkHttp3 with pretty logger(using for retrofit request-response)
     implementation('com.github.ihsanbal:LoggingInterceptor:3.1.0') {
         exclude group: 'org.json', module: 'json'
     }
 
-     // material design
-     implementation "com.google.android.material:material:$material_version"
-}
+    // material design
+    implementation "com.google.android.material:material:$material_version"
 
+    // recycler view
+    implementation "androidx.recyclerview:recyclerview:$recyclerview"
+
+    // card view
+    implementation "androidx.cardview:cardview:$cardview"
+}
 
 def getBaseUrl() {
     Properties properties = new Properties()
@@ -85,3 +91,5 @@ def getAppId() {
 
     return appId
 }
+
+
