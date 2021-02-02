@@ -29,8 +29,8 @@ object RetrofitClient {
                                 .log(Platform.INFO)
                                 .request("LOG")
                                 .response("LOG")
-                                .addHeader("cityCode", "53")
-                                .addQueryParam("moonStatus", "crescent")
+//                                .addHeader("cityCode", "53")
+//                                .addQueryParam("moonStatus", "crescent")
                                 .build()
                         )
 
